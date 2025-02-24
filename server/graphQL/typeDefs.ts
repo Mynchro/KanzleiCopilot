@@ -20,11 +20,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createClient(
-      name: String!
-      email: String!
-      selectedPackage: String!
-    ): Client
+    createClient(name: String!, email: String!): Client
     getTaxAdvice(question: String!): String
   }
 `;

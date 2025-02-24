@@ -13,7 +13,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/create-user" className="hover:text-gray-400">
+          <Link to="/create-client" className="hover:text-gray-400">
             Kundenregistrierung
           </Link>
         </li>

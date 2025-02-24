@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_PACKAGES, CREATE_USER } from "../../../../server/graphQL/queries";
+import { CREATE_CLIENT } from "../../../../server/graphQL/queries";
 
 export default function CreateClient() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const [createClient] = useMutation(CREATE_USER);
+  const [createClient] = useMutation(CREATE_CLIENT);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,21 +26,21 @@ export default function CreateClient() {
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg text-black"
         />
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg text-black"
         />
 
         <button
           type="submit"
           className="w-full bg-blue-600 text-white p-3 rounded-lg"
         >
-          Angebot erstellen
+          Mandanten erstellen
         </button>
       </form>
     </div>

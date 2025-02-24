@@ -1,4 +1,3 @@
-// src/graphql/queries.ts
 import { gql } from "@apollo/client";
 
 export const GET_TAX_ADVICE = gql`
@@ -18,17 +17,12 @@ export const GET_PACKAGES = gql`
   }
 `;
 
-export const CREATE_USER = gql`
-  mutation CreateUser(
-    $name: String!
-    $email: String!
-    $selectedPackage: String!
-  ) {
-    createUser(name: $name, email: $email, selectedPackage: $selectedPackage) {
+export const CREATE_CLIENT = gql`
+  mutation CreateClient($name: String!, $email: String!) {
+    createClient(name: $name, email: $email) {
       id
       name
       email
-      selectedPackage
     }
   }
 `;
