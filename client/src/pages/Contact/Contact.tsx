@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <div className="text-center text-white p-6">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center p-6">
       <h1 className="text-4xl font-semibold mb-4">Kontakt</h1>
       <p className="mb-6 text-xl">
         Hast du Fragen oder möchtest du mehr über meine Projekte erfahren?{" "}

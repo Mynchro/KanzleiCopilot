@@ -41,9 +41,9 @@ export default function CreateUser() {
   };
 
   return (
-    <div className="max-w-lg mx-auto">
-      <h1 className="text-3xl font-semibold text-gray-800 mb-6">
-        Neuen User anlegen
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center p-6">
+      <h1 className="text-3xl font-semibold text-white mb-6">
+        Neuen Mandanten anlegen
       </h1>
       {loading ? (
         <p>Loading...</p>
@@ -63,7 +63,7 @@ export default function CreateUser() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg"
           />
-          <select
+          {/* <select
             value={selectedPackage}
             onChange={(e) => setSelectedPackage(e.target.value)}
             className="w-full p-3 border border-gray-300 rounded-lg"
@@ -73,7 +73,7 @@ export default function CreateUser() {
                 {pkg.name} - {pkg.price}€
               </option>
             ))}
-          </select>
+          </select> */}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white p-3 rounded-lg"

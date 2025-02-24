@@ -17,9 +17,12 @@ export default function Home() {
         >
           KanzleiPilot
         </a>{" "}
-        - deine Lösung für transparente Honorare, klare Spielregeln und mehr
-        Freude an der Beratung. <br />
-        KanzleiCopilot ist dein Mini-KI-Steuerberater. Neben einer abgespeckten
+        <em>
+          - deine Lösung für transparente Honorare, klare Spielregeln und mehr
+          Freude an der Beratung.{" "}
+        </em>{" "}
+        <br />
+        KanzleiCoPilot ist dein Mini-KI-Steuerberater. Neben einer abgespeckten
         Version zur Erstellung von Steuerpaketen und Angebote für unsere
         Mandanten, bieten wir zusätzlich einen KI-Agenten, der dir das Leben zu
         steuerrechtlichen Fragen einfacher gestalten soll!
@@ -34,7 +37,7 @@ export default function Home() {
       <p className="max-w-3xl text-lg mb-6 text-gray-300">
         Deinen AI-Steuerberater findest du unter{" "}
         <span className="font-semibold text-blue-400">
-          "Dein Kanzlei-Copilot"
+          "Dein KanzleiCoPilot"
         </span>
         .
       </p>

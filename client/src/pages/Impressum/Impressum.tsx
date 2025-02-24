@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Impressum() {
   return (
-    <div className="text-white">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center p-6">
       <h1>Impressum</h1>
       <h3>Angaben gemäß § 5 TMG</h3>
       <p>
