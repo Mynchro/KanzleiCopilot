@@ -18,16 +18,13 @@ const TaxAdvisor = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+    <div className=" text-white min-h-screen flex flex-col justify-center items-center p-6">
+      <h1 className="text-2xl font-semibold text-center mb-6 ">
         Steuerberatung KI-Agent
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="question"
-            className="block text-lg font-medium text-gray-700"
-          >
+          <label htmlFor="question" className="block text-lg font-medium ">
             Frage zur Steuerberatung:
           </label>
           <input

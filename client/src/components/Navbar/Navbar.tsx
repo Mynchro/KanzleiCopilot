@@ -23,6 +23,11 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
+          <Link to="/package-builder" className="hover:text-gray-400">
+            Angebotserstellung
+          </Link>
+        </li>
+        <li>
           <Link to="/contact" className="hover:text-gray-400">
             Kontakt
           </Link>
