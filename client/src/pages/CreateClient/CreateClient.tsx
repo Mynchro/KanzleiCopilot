@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_PACKAGES, CREATE_USER } from "../../../../server/graphQL/queries";
 
-export default function CreateUser() {
+export default function CreateClient() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const [createUser] = useMutation(CREATE_USER);
+  const [createClient] = useMutation(CREATE_USER);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createUser({ variables: { name, email } });
-    // Reset form or show success
+    await createClient({ variables: { name, email } });
+    alert("Mandant erfolgreich erstellt!");
   };
 
   return (

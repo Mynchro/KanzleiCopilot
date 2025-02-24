@@ -1,11 +1,10 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
-  type User {
+  type Client {
     id: ID
     name: String
     email: String
-    selectedPackage: String
   }
 
   type Package {
@@ -16,13 +15,16 @@ export const typeDefs = gql`
   }
 
   type Query {
-    getUser(id: ID!): User
+    getClient(id: ID!): Client
     getPackages: [Package!]!
   }
 
   type Mutation {
-    createUser(name: String!, email: String!, selectedPackage: String!): User
-    updateUserPackage(id: ID!, selectedPackage: String!): User
+    createClient(
+      name: String!
+      email: String!
+      selectedPackage: String!
+    ): Client
     getTaxAdvice(question: String!): String
   }
 `;

@@ -1,39 +1,26 @@
-import User from "../models/User";
+import Client from "../models/Client";
 import Package from "../models/Package";
 import openai from "../openAI/config";
 
-interface UserInput {
+interface ClientInput {
   name: string;
   email: string;
-  selectedPackage: string;
 }
 
 export const resolvers = {
   Query: {
-    getUser: async (_: any, { id }: { id: string }) => {
-      return await User.findById(id);
+    getClient: async (_: any, { id }: { id: string }) => {
+      return await Client.findById(id);
     },
     getPackages: async () => {
       return await Package.find();
     },
   },
   Mutation: {
-    createUser: async (_: any, { name, email, selectedPackage }: UserInput) => {
-      const user = new User({ name, email, selectedPackage });
-      await user.save();
-      return user;
-    },
-    updateUserPackage: async (
-      _: any,
-      { id, selectedPackage }: { id: string; selectedPackage: string }
-    ) => {
-      const user = await User.findById(id);
-      if (!user) {
-        throw new Error("User not found");
-      }
-      user.selectedPackage = selectedPackage;
-      await user.save();
-      return user;
+    createClient: async (_: any, { name, email }: ClientInput) => {
+      const client = new Client({ name, email });
+      await client.save();
+      return client;
     },
     getTaxAdvice: async (_: any, { question }: { question: string }) => {
       try {

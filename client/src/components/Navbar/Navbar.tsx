@@ -19,7 +19,7 @@ export default function Navbar() {
         </li>
         <li>
           <Link to="/tax-advice" className="hover:text-gray-400">
-            Dein KanzleiCoPilot
+            Dein Kanzlei<span className="text-red-400">Co</span>Pilot!
           </Link>
         </li>
         <li>

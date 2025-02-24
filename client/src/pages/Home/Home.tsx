@@ -25,7 +25,7 @@ export default function Home() {
         KanzleiCoPilot ist dein Mini-KI-Steuerberater. Neben einer abgespeckten
         Version zur Erstellung von Steuerpaketen und Angebote für unsere
         Mandanten, bieten wir zusätzlich einen KI-Agenten, der dir das Leben zu
-        steuerrechtlichen Fragen einfacher gestalten soll!
+        steuerrechtlichen Fragen einfacher gestaltet!
       </p>
       <p className="max-w-3xl text-lg mb-6 text-gray-300">
         Unter{" "}
@@ -35,9 +35,9 @@ export default function Home() {
         geht es zur Erstellung neuer Mandantenprofile.
       </p>
       <p className="max-w-3xl text-lg mb-6 text-gray-300">
-        Deinen AI-Steuerberater findest du unter{" "}
+        Deinen KI-Steuerberater findest du unter{" "}
         <span className="font-semibold text-blue-400">
-          "Dein KanzleiCoPilot"
+          "Dein Kanzlei<span className="text-red-400">Co</span>Pilot!
         </span>
         .
       </p>
