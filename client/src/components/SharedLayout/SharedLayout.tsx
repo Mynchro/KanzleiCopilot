@@ -5,7 +5,7 @@ const SharedLayout = () => {
   return (
     <div className="flex flex-col sm:flex-row min-h-screen">
       <Navbar />
-      <main className="flex-1 bg-gray-100 p-6">
+      <main className="flex-1 bg-[#151719]">
         <Outlet />
       </main>
     </div>
