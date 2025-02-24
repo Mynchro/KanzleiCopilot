@@ -1,31 +1,83 @@
-import { useQuery } from "@apollo/client";
-import { GET_PACKAGES } from "../../../../server/graphQL/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_CLIENTS, UPDATE_CLIENT } from "../../../../server/graphQL/queries";
 import { useState } from "react";
 
 export default function PackageBuilder() {
-  const [selectedPackage, setSelectedPackage] = useState("");
-  const { data, loading } = useQuery(GET_PACKAGES);
+  const { data, loading, error } = useQuery(GET_CLIENTS);
+  const [updateClient] = useMutation(UPDATE_CLIENT, {
+    refetchQueries: [{ query: GET_CLIENTS }],
+  });
+
+  const [selectedClient, setSelectedClient] = useState<string>("");
+  const [clientData, setClientData] = useState({
+    type: "",
+    legalForm: "",
+    taxDuties: [],
+    services: [],
+  });
+
+  if (loading) return <p className="text-white">Loading...</p>;
+  if (error) return <p className="text-white">Error loading clients</p>;
+
+  const handleUpdate = (field: string, value: any) => {
+    if (!selectedClient) return;
+    const updatedData = { ...clientData, [field]: value };
+    setClientData(updatedData);
+    updateClient({ variables: { id: selectedClient, input: updatedData } });
+  };
+
   return (
-    <div className=" bg-gray-500  min-h-screen flex flex-col justify-center items-center p-6">
-      <h1>Test</h1>
+    <div className=" bg-gray-900  min-h-screen flex flex-col justify-center items-center p-6">
+      <h2 className="text-xl text-white font-semibold">Angebotserstellung</h2>
+
       <div>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <form>
-            <select
-              value={selectedPackage}
-              onChange={(e) => setSelectedPackage(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg"
-            >
-              {data?.getPackages.map((pkg: any) => (
-                <option key={pkg.id} value={pkg.name}>
-                  {pkg.name} - {pkg.price}€
-                </option>
-              ))}
-            </select>
-          </form>
-        )}
+        <select
+          value={selectedClient}
+          onChange={(e) => {
+            const client = data.getClients.find(
+              (c: any) => c.id === e.target.value
+            );
+            setSelectedClient(e.target.value);
+            setClientData(client);
+          }}
+          className="w-full p-2 border border-gray-300 rounded-lg"
+        >
+          <option value="">Mandanten wählen...</option>
+          {data.getClients.map((client: any) => (
+            <option key={client.id} value={client.id}>
+              {client.name}
+            </option>
+          ))}
+        </select>
+
+        {/* Typ Auswahl */}
+        <select
+          value={clientData.type}
+          onChange={(e) => handleUpdate("type", e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-lg mt-2"
+        >
+          <option value="">Typ wählen...</option>
+          <option value="Freiberufler">Freiberufler</option>
+          <option value="GmbH">GmbH</option>
+          <option value="Einzelunternehmer">Einzelunternehmer</option>
+          <option value="UG">UG</option>
+          <option value="AG">AG</option>
+        </select>
+
+        {/* Rechtsform Auswahl */}
+        <select
+          value={clientData.legalForm}
+          onChange={(e) => handleUpdate("legalForm", e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-lg mt-2"
+        >
+          <option value="">Rechtsform wählen...</option>
+          <option value="GmbH">GmbH</option>
+          <option value="UG">UG</option>
+          <option value="AG">AG</option>
+          <option value="Einzelunternehmen">Einzelunternehmen</option>
+          <option value="GbR">GbR</option>
+          <option value="Freiberufler">Freiberufler</option>
+        </select>
       </div>
     </div>
   );

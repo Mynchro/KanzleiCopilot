@@ -9,8 +9,8 @@ interface ClientInput {
 
 export const resolvers = {
   Query: {
-    getClient: async (_: any, { id }: { id: string }) => {
-      return await Client.findById(id);
+    getClients: async () => {
+      return await Client.find();
     },
     getPackages: async () => {
       return await Package.find();
