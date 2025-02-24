@@ -4,6 +4,8 @@ import Home from "./pages/Home/Home";
 import CreateUser from "./pages/CreateUser/CreateUser";
 import TaxAdvisor from "./pages/TaxAdvisor/TaxAdvisor";
 import { ApolloProvider } from "@apollo/client";
+import Contact from "./pages/Contact/Contact";
+import Impressum from "./pages/Impressum/Impressum";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="create-user" element={<CreateUser />} />
             <Route path="tax-advice" element={<TaxAdvisor />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="impressum" element={<Impressum />} />
           </Route>
         </Routes>
       </BrowserRouter>
