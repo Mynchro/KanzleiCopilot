@@ -1,10 +1,29 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_CLIENTS, UPDATE_CLIENT } from "../../../../server/graphQL/queries";
+import {
+  GET_CLIENTS,
+  UPDATE_CLIENT,
+  GET_SERVICES,
+  GET_TAX_DUTIES,
+} from "../../../../server/graphQL/queries";
 import { useState } from "react";
-import { Clientform } from "../../types";
+import { Clientform, Service, TaxDuty } from "../../types";
 
 export default function PackageBuilder() {
-  const { data, loading, error } = useQuery(GET_CLIENTS);
+  const {
+    data: clientsData,
+    loading: clientsLoading,
+    error: clientsError,
+  } = useQuery(GET_CLIENTS);
+  const {
+    data: taxDutiesData,
+    loading: taxDutiesLoading,
+    error: taxDutiesError,
+  } = useQuery(GET_TAX_DUTIES);
+  const {
+    data: servicesData,
+    loading: servicesLoading,
+    error: servicesError,
+  } = useQuery(GET_SERVICES);
   const [updateClient] = useMutation(UPDATE_CLIENT, {
     refetchQueries: [{ query: GET_CLIENTS }],
   });
@@ -17,10 +36,8 @@ export default function PackageBuilder() {
     services: [],
   });
 
-  if (loading) return <p className="text-white">Loading...</p>;
-  if (error) return <p className="text-white">Error loading clients</p>;
-  console.log("error", error);
-  console.log("data", data);
+  if (clientsLoading) return <p className="text-white">Loading...</p>;
+  if (clientsError) return <p className="text-white">Error loading clients</p>;
 
   const handleUpdate = (field: string, value: any) => {
     if (!selectedClient) return;
@@ -33,11 +50,11 @@ export default function PackageBuilder() {
     <div className=" bg-gray-900  min-h-screen flex flex-col justify-center items-center p-6">
       <h2 className="text-xl text-white font-semibold">Angebotserstellung</h2>
 
-      <div>
+      <div className="border-4 p-3">
         <select
           value={selectedClient}
           onChange={(e) => {
-            const client = data.getClients.find(
+            const client = clientsData.getClients.find(
               (c: Clientform) => c.id === e.target.value
             );
             setSelectedClient(e.target.value);
@@ -46,7 +63,7 @@ export default function PackageBuilder() {
           className="w-full p-2 border border-gray-300 rounded-lg"
         >
           <option value="">Mandanten wählen...</option>
-          {data.getClients.map((client: Clientform) => (
+          {clientsData.getClients.map((client: Clientform) => (
             <option key={client.id} value={client.id}>
               {client.firstName} {client.lastName}
             </option>
@@ -81,6 +98,35 @@ export default function PackageBuilder() {
           <option value="GbR">GbR</option>
           <option value="Freiberufler">Freiberufler</option>
         </select>
+      </div>
+      <div className="border-4 border-red-500">
+        <h3>Steuerpflicht auswählen</h3>
+        <ul>
+          {taxDutiesData.getTaxDuties.map((t: TaxDuty, index: number) => (
+            <li key={index} className="text-white list-disc ">
+              <p>{t.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="border-4 border-red-500">
+        <h3>Wunschleistung auswählen</h3>
+        <div className="flex items-center mb-4"></div>
+        {servicesData.getServices.map((s: Service, index: number) => (
+          <div key={index} className="flex items-center mb-4">
+            <input
+              id={`service-checkbox-${index}`} // Eindeutige ID
+              type="checkbox"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500"
+            />
+            <label
+              htmlFor={`service-checkbox-${index}`} // Verweist auf die eindeutige ID
+              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              {s.name}
+            </label>
+          </div>
+        ))}
       </div>
     </div>
   );
