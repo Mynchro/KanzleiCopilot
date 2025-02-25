@@ -77,20 +77,6 @@ export default function PackageBuilder() {
 
       {/* Typ & Rechtsform Auswahl */}
       <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-        <label className="text-gray-300 font-medium">Typ wählen</label>
-        <select
-          value={clientData.type}
-          onChange={(e) => handleUpdate("type", e.target.value)}
-          className="w-full p-2 mt-2 bg-gray-700 text-gray-300 border border-gray-600 rounded-lg"
-        >
-          <option value="">Typ wählen...</option>
-          <option value="Freiberufler">Freiberufler</option>
-          <option value="GmbH">GmbH</option>
-          <option value="Einzelunternehmer">Einzelunternehmer</option>
-          <option value="UG">UG</option>
-          <option value="AG">AG</option>
-        </select>
-
         <label className="text-gray-300 font-medium mt-4">
           Rechtsform wählen
         </label>

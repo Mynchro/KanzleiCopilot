@@ -29,7 +29,6 @@ export const GET_CLIENTS = gql`
       firstName
       lastName
       email
-      type
       legalForm
       taxDuties
       services
@@ -40,7 +39,6 @@ export const UPDATE_CLIENT = gql`
   mutation UpdateClient($id: ID!, $input: ClientUpdateInput!) {
     updateClient(id: $id, input: $input) {
       id
-      type
       legalForm
       taxDuties
       services
