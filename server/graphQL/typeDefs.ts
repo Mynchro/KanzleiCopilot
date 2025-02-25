@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 export const typeDefs = gql`
   type Client {
     id: ID!
-    name: String!
+    firstName: String!
+    lastName: String!
     email: String!
     type: String
     legalForm: String
@@ -25,7 +26,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createClient(name: String!, email: String!): Client
+    createClient(firstName: String!, lastName: String!, email: String!): Client
     updateClientType(id: ID!, type: String!): Client
     updateClientLegalForm(id: ID!, legalForm: String!): Client
     updateClientTaxDuties(id: ID!, taxDuties: [String]!): Client

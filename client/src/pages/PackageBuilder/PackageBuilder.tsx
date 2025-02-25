@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_CLIENTS, UPDATE_CLIENT } from "../../../../server/graphQL/queries";
 import { useState } from "react";
+import { Clientform } from "../../types";
 
 export default function PackageBuilder() {
   const { data, loading, error } = useQuery(GET_CLIENTS);
@@ -18,6 +19,8 @@ export default function PackageBuilder() {
 
   if (loading) return <p className="text-white">Loading...</p>;
   if (error) return <p className="text-white">Error loading clients</p>;
+  console.log("error", error);
+  console.log("data", data);
 
   const handleUpdate = (field: string, value: any) => {
     if (!selectedClient) return;
@@ -35,7 +38,7 @@ export default function PackageBuilder() {
           value={selectedClient}
           onChange={(e) => {
             const client = data.getClients.find(
-              (c: any) => c.id === e.target.value
+              (c: Clientform) => c.id === e.target.value
             );
             setSelectedClient(e.target.value);
             setClientData(client);
@@ -43,9 +46,9 @@ export default function PackageBuilder() {
           className="w-full p-2 border border-gray-300 rounded-lg"
         >
           <option value="">Mandanten wählen...</option>
-          {data.getClients.map((client: any) => (
+          {data.getClients.map((client: Clientform) => (
             <option key={client.id} value={client.id}>
-              {client.name}
+              {client.firstName} {client.lastName}
             </option>
           ))}
         </select>

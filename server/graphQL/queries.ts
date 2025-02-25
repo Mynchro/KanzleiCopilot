@@ -20,10 +20,15 @@ export const GET_PACKAGES = gql`
 
 // client-related
 export const CREATE_CLIENT = gql`
-  mutation CreateClient($name: String!, $email: String!) {
-    createClient(name: $name, email: $email) {
+  mutation CreateClient(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+  ) {
+    createClient(firstName: $firstName, lastName: $lastName, email: $email) {
       id
-      name
+      firstName
+      lastName
       email
     }
   }
@@ -33,7 +38,9 @@ export const GET_CLIENTS = gql`
   query GetClients {
     getClients {
       id
-      name
+      firstName
+      lastName
+      email
       type
       legalForm
       taxDuties

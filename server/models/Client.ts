@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const clientSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   type: {
     type: String,
@@ -13,6 +14,7 @@ const clientSchema = new mongoose.Schema({
   },
   taxDuties: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaxDuty" }],
   requestedServices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Service" }],
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Client = mongoose.model("Client", clientSchema);

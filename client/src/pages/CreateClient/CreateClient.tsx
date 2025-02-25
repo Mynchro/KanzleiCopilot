@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { CREATE_CLIENT } from "../../../../server/graphQL/queries";
+import { useForm } from "react-hook-form";
+import { Clientform } from "../../types";
 
 export default function CreateClient() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Clientform>();
   const [createClient] = useMutation(CREATE_CLIENT);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await createClient({ variables: { name, email } });
-    alert("Mandant erfolgreich erstellt!");
+  const onSubmit = async (data: Clientform) => {
+    try {
+      await createClient({
+        variables: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+        },
+      });
+      alert("Mandant erfolgreich erstellt!");
+    } catch (error) {
+      console.error("Error creating client", error);
+    }
   };
 
   return (
@@ -20,21 +32,48 @@ export default function CreateClient() {
         Neuen Mandanten anlegen
       </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg text-black"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg text-black"
-        />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <label htmlFor="firstName">Vorname</label>
+          <input
+            id="firstName"
+            type="text"
+            placeholder="Vorname"
+            {...register("firstName", { required: "First Name ist required" })}
+            className="w-full p-3 border border-gray-300 rounded-lg text-black"
+          />
+          {errors.firstName && (
+            <span className="text-red-500">{errors.firstName.message}</span>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="lastName">Nachname</label>
+          <input
+            id="lastName"
+            type="text"
+            placeholder="Nachname"
+            {...register("lastName", { required: "Last Name ist required" })}
+            className="w-full p-3 border border-gray-300 rounded-lg text-black"
+          />
+          {errors.lastName && (
+            <span className="text-red-500">{errors.lastName.message}</span>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="email">E-Mail Adresse</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            {...register("email", { required: "Email ist required" })}
+            className="w-full p-3 border border-gray-300 rounded-lg text-black"
+          />
+          {errors.email && (
+            <span className="text-red-500">{errors.email.message}</span>
+          )}
+        </div>
 
         <button
           type="submit"

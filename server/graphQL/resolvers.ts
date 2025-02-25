@@ -1,11 +1,7 @@
 import Client from "../models/Client";
 import Package from "../models/Package";
 import openai from "../openAI/config";
-
-interface ClientInput {
-  name: string;
-  email: string;
-}
+import { Clientform } from "../../client/src/types";
 
 export const resolvers = {
   Query: {
@@ -17,8 +13,11 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createClient: async (_: any, { name, email }: ClientInput) => {
-      const client = new Client({ name, email });
+    createClient: async (
+      _: any,
+      { firstName, lastName, email }: Clientform
+    ) => {
+      const client = new Client({ firstName, lastName, email });
       await client.save();
       return client;
     },
