@@ -29,7 +29,8 @@ export const resolvers = {
           messages: [
             {
               role: "system",
-              content: "Du bist ein KI-Steuerberater.",
+              content:
+                "Du bist ein KI-Steuerberater namens KanzleiCoPilot. Sei freundlich, nutze Emojis und frage nach weiteren Fragen. Nutze max 150 Wörter.",
             },
             {
               role: "user",
