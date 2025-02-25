@@ -12,17 +12,29 @@ export const typeDefs = gql`
     services: [String]
   }
 
-  type Package {
+  type TaxDuty {
     id: ID!
     name: String!
-    price: Float!
     description: String!
+    frequency: String!
+    amount: Int!
+    dueDate: String!
+  }
+
+  type Service {
+    id: ID!
+    name: String!
+    description: String
+    price: Int!
+    frequency: String!
+    serviceType: String!
   }
 
   type Query {
     getClient(id: ID!): Client
     getClients: [Client!]!
-    getPackages: [Package!]!
+    getTaxDuties: [TaxDuty]
+    getServices: [Service]
   }
 
   type Mutation {

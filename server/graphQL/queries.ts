@@ -7,17 +7,6 @@ export const GET_TAX_ADVICE = gql`
   }
 `;
 
-export const GET_PACKAGES = gql`
-  query {
-    getPackages {
-      id
-      name
-      price
-      description
-    }
-  }
-`;
-
 // client-related
 export const CREATE_CLIENT = gql`
   mutation CreateClient(
@@ -33,7 +22,6 @@ export const CREATE_CLIENT = gql`
     }
   }
 `;
-
 export const GET_CLIENTS = gql`
   query GetClients {
     getClients {
@@ -48,7 +36,6 @@ export const GET_CLIENTS = gql`
     }
   }
 `;
-
 export const UPDATE_CLIENT = gql`
   mutation UpdateClient($id: ID!, $input: ClientUpdateInput!) {
     updateClient(id: $id, input: $input) {
@@ -57,6 +44,34 @@ export const UPDATE_CLIENT = gql`
       legalForm
       taxDuties
       services
+    }
+  }
+`;
+
+// misc
+
+export const GET_TAX_DUTIES = gql`
+  query GetTaxDuties {
+    getTaxDuties {
+      id
+      name
+      description
+      frequency
+      amount
+      dueDate
+    }
+  }
+`;
+
+export const GET_SERVICES = gql`
+  query GetServices {
+    getServices {
+      id
+      name
+      description
+      price
+      frequency
+      serviceType
     }
   }
 `;

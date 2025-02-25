@@ -1,15 +1,19 @@
 import Client from "../models/Client";
-import Package from "../models/Package";
 import openai from "../openAI/config";
 import { Clientform } from "../../client/src/types";
+import TaxDuty from "../models/TaxDuty";
+import Service from "../models/Service";
 
 export const resolvers = {
   Query: {
     getClients: async () => {
       return await Client.find();
     },
-    getPackages: async () => {
-      return await Package.find();
+    getTaxDuties: async () => {
+      return await TaxDuty.find();
+    },
+    getServices: async () => {
+      return await Service.find();
     },
   },
   Mutation: {
