@@ -22,3 +22,7 @@ export interface Service {
   frequency: string;
   serviceType: string;
 }
+
+export interface SubmitButtonProps {
+  children: React.ReactNode;
+}

@@ -22,10 +22,11 @@ export default function Home() {
           Freude an der Beratung.{" "}
         </em>{" "}
         <br />
-        KanzleiCoPilot ist dein Mini-KI-Steuerberater. Neben einer abgespeckten
-        Version zur Erstellung von Steuerpaketen und Angebote für unsere
-        Mandanten, bieten wir zusätzlich einen KI-Agenten, der dir das Leben zu
-        steuerrechtlichen Fragen einfacher gestaltet!
+        Kanzlei<span className="text-red-400">Co</span>Pilot! ist dein
+        Mini-KI-Steuerberater. Neben einer abgespeckten Version zur Erstellung
+        von Steuerpaketen und Angebote für unsere Mandanten, bieten wir
+        zusätzlich einen KI-Agenten, der dir das Leben zu steuerrechtlichen
+        Fragen einfacher gestaltet!
       </p>
       <p className="max-w-3xl text-lg mb-6 text-gray-300">
         Unter{" "}

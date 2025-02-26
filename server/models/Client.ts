@@ -9,7 +9,7 @@ const clientSchema = new mongoose.Schema({
     enum: ["GmbH", "UG", "AG", "Einzelunternehmen", "GbR", "Freiberufler"],
   },
   taxDuties: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaxDuty" }],
-  requestedServices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Service" }],
+  services: [{ type: mongoose.Schema.Types.ObjectId, ref: "Service" }],
   createdAt: { type: Date, default: Date.now },
 });
 

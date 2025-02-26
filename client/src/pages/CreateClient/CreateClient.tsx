@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_CLIENT } from "../../../../server/graphQL/queries";
 import { useForm } from "react-hook-form";
 import { Clientform } from "../../types";
+import SubmitButton from "../../components/Button/SubmitButton";
 
 export default function CreateClient() {
   const {
@@ -75,12 +76,7 @@ export default function CreateClient() {
           )}
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-3 rounded-lg"
-        >
-          Mandanten erstellen
-        </button>
+        <SubmitButton>Mandant registrieren</SubmitButton>
       </form>
     </div>
   );

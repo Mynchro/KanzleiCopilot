@@ -47,5 +47,18 @@ export const resolvers = {
         throw new Error("Fehler bei der Kommunikation mit OpenAI.");
       }
     },
+    updateClient: async (_: any, { id, input }: { id: string; input: any }) => {
+      const client = await Client.findById(id);
+      if (!client) {
+        throw new Error("Client nicht gefunden");
+      }
+      if (input.legalForm !== undefined) client.legalForm = input.legalForm;
+      if (input.taxDuties !== undefined) client.taxDuties = input.taxDuties;
+      if (input.services !== undefined) client.services = input.services;
+
+      await client.save();
+
+      return client;
+    },
   },
 };

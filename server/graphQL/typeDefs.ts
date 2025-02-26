@@ -1,6 +1,12 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  input ClientUpdateInput {
+    legalForm: String
+    taxDuties: [ID]
+    services: [ID]
+  }
+
   type Client {
     id: ID!
     firstName: String!
@@ -39,10 +45,7 @@ export const typeDefs = gql`
 
   type Mutation {
     createClient(firstName: String!, lastName: String!, email: String!): Client
-    updateClientType(id: ID!, type: String!): Client
-    updateClientLegalForm(id: ID!, legalForm: String!): Client
-    updateClientTaxDuties(id: ID!, taxDuties: [String]!): Client
-    updateClientServices(id: ID!, services: [String]!): Client
+    updateClient(id: ID!, input: ClientUpdateInput): Client
     getTaxAdvice(question: String!): String
   }
 `;
