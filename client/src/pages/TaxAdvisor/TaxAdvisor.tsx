@@ -29,7 +29,7 @@ const TaxAdvisor = () => {
   ];
 
   return (
-    <div className="text-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-12 p-6">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col lg:flex-row items-center justify-center gap-12 p-6">
       {/* left side - AI Agent */}
       <div className="max-w-md w-full">
         <div className="flex gap-2 justify-center items-center mb-2">

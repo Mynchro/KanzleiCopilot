@@ -14,6 +14,7 @@ export default function PackageBuilder() {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm();
@@ -74,79 +75,135 @@ export default function PackageBuilder() {
   if (clientsError || taxDutiesError || servicesError)
     return <p className="text-red-500">Fehler beim Laden der Daten</p>;
 
+  const selectedClient = clientsData?.getClients.find(
+    (client) => client.id === watch("clientId")
+  );
+
   return (
-    <div className="bg-gray-900 min-h-screen flex flex-col items-center p-6">
-      <h2 className="text-2xl text-white font-bold mb-6">Angebotserstellung</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md">
-          <label className="text-gray-300 font-medium">Mandanten wählen</label>
-          <select
-            {...register("clientId", { required: true })}
-            className="w-full p-2 mt-2 bg-gray-700 text-gray-300 border border-gray-600 rounded-lg"
-          >
-            <option value="">Mandanten wählen...</option>
-            {clientsData.getClients.map((client: Clientform) => (
-              <option key={client.id} value={client.id}>
-                {client.firstName} {client.lastName}
-              </option>
+    <div className="bg-gray-900 min-h-screen flex flex-col lg:flex-row items-center justify-center gap-12 p-6">
+      <div className="flex flex-col justify-center items-center">
+        <h2 className="text-2xl text-white font-bold mb-6">
+          Angebotserstellung
+        </h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md">
+            <label className="text-gray-300 font-medium">
+              Mandanten wählen
+            </label>
+            <select
+              {...register("clientId", { required: true })}
+              className="w-full p-2 mt-2 bg-gray-700 text-gray-300 border border-gray-600 rounded-lg"
+            >
+              <option value="">Mandanten wählen...</option>
+              {clientsData.getClients.map((client: Clientform) => (
+                <option key={client.id} value={client.id}>
+                  {client.firstName} {client.lastName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4">
+            <label className="text-gray-300 font-medium mt-4">
+              Rechtsform wählen
+            </label>
+            <select
+              {...register("legalForm", { required: true })}
+              className="w-full p-2 mt-2 bg-gray-700 text-gray-300 border border-gray-600 rounded-lg"
+            >
+              <option value="">Rechtsform wählen...</option>
+              <option value="GmbH">GmbH</option>
+              <option value="UG">UG</option>
+              <option value="AG">AG</option>
+              <option value="Einzelunternehmen">Einzelunternehmen</option>
+              <option value="GbR">GbR</option>
+              <option value="Freiberufler">Freiberufler</option>
+            </select>
+          </div>
+          <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4">
+            <h3 className="text-lg text-gray-300 font-medium">
+              Steuerpflicht auswählen
+            </h3>
+            {taxDutiesData.getTaxDuties.map(
+              (taxDuty: TaxDuty, index: number) => (
+                <div key={taxDuty.id} className="flex items-center mt-2">
+                  <input
+                    type="checkbox"
+                    {...register(`taxDuties.${index}`)}
+                    value={taxDuty.id}
+                    className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-500 rounded focus:ring-blue-400"
+                  />
+                  <label className="ml-2 text-sm font-medium text-gray-300">
+                    {taxDuty.name}
+                  </label>
+                </div>
+              )
+            )}
+          </div>
+          <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4 mb-4">
+            <h3 className="text-lg text-gray-300 font-medium">
+              Wunschleistung auswählen
+            </h3>
+            {servicesData.getServices.map((service: Service, index: number) => (
+              <div key={service.id} className="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  {...register(`services.${index}`)}
+                  value={service.id}
+                  className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-500 rounded focus:ring-blue-400"
+                />
+                <label className="ml-2 text-sm font-medium text-gray-300">
+                  {service.name}
+                </label>
+              </div>
             ))}
-          </select>
-        </div>
-        <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-          <label className="text-gray-300 font-medium mt-4">
-            Rechtsform wählen
-          </label>
-          <select
-            {...register("legalForm", { required: true })}
-            className="w-full p-2 mt-2 bg-gray-700 text-gray-300 border border-gray-600 rounded-lg"
-          >
-            <option value="">Rechtsform wählen...</option>
-            <option value="GmbH">GmbH</option>
-            <option value="UG">UG</option>
-            <option value="AG">AG</option>
-            <option value="Einzelunternehmen">Einzelunternehmen</option>
-            <option value="GbR">GbR</option>
-            <option value="Freiberufler">Freiberufler</option>
-          </select>
-        </div>
-        <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-          <h3 className="text-lg text-gray-300 font-medium">
-            Steuerpflicht auswählen
-          </h3>
-          {taxDutiesData.getTaxDuties.map((taxDuty: TaxDuty, index: number) => (
-            <div key={taxDuty.id} className="flex items-center mt-2">
-              <input
-                type="checkbox"
-                {...register(`taxDuties.${index}`)}
-                value={taxDuty.id}
-                className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-500 rounded focus:ring-blue-400"
-              />
-              <label className="ml-2 text-sm font-medium text-gray-300">
-                {taxDuty.name}
-              </label>
-            </div>
-          ))}
-        </div>
-        <div className="w-full max-w-lg bg-gray-800 p-4 rounded-lg shadow-md mt-4 mb-4">
-          <h3 className="text-lg text-gray-300 font-medium">
-            Wunschleistung auswählen
-          </h3>
-          {servicesData.getServices.map((service: Service, index: number) => (
-            <div key={service.id} className="flex items-center mt-2">
-              <input
-                type="checkbox"
-                {...register(`services.${index}`)}
-                value={service.id}
-                className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-500 rounded focus:ring-blue-400"
-              />
-              <label className="ml-2 text-sm font-medium text-gray-300">
-                {service.name}
-              </label>
-            </div>
-          ))}
-        </div>
-        <SubmitButton>Angebot erstellen</SubmitButton>
-      </form>
+          </div>
+          <SubmitButton>Angebot erstellen</SubmitButton>
+        </form>{" "}
+      </div>
+      <div className="flex flex-col justify-center items-start bg-gray-100 p-8 shadow-lg rounded-lg w-[600px] min-h-[400px] border border-gray-300">
+        <h2 className="text-2xl text-black font-bold mb-6 text-center w-full">
+          Ihr individuelles Angebot
+        </h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          {/* Mandant */}
+          <div className="w-full p-4 border-b border-gray-300">
+            <label className="text-gray-700 font-semibold text-lg">
+              Mandant:
+            </label>
+            <p className="text-gray-600 mt-1">
+              <p className="text-gray-600 mt-1">
+                {selectedClient
+                  ? `${selectedClient.firstName} ${selectedClient.lastName}`
+                  : "Kein Mandant ausgewählt"}
+              </p>
+            </p>
+          </div>
+
+          {/* Rechtsform wählen */}
+          <div className="w-full p-4 border-b border-gray-300">
+            <label className="text-gray-700 font-semibold text-lg">
+              Rechtsform wählen:
+            </label>
+            <p className="text-gray-600 mt-1"></p>
+          </div>
+
+          {/* Steuerpflicht */}
+          <div className="w-full p-4 border-b border-gray-300">
+            <h3 className="text-lg text-gray-700 font-semibold">
+              Steuerpflicht:
+            </h3>
+            <p className="text-gray-600 mt-1"></p>
+          </div>
+
+          {/* Wunschleistung */}
+          <div className="w-full p-4 border-b border-gray-300">
+            <h3 className="text-lg text-gray-700 font-semibold">
+              Wunschleistung:
+            </h3>
+            <p className="text-gray-600 mt-1"></p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
