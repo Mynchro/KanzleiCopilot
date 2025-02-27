@@ -8,6 +8,7 @@ export default function CreateClient() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Clientform>();
   const [createClient] = useMutation(CREATE_CLIENT);
@@ -22,6 +23,7 @@ export default function CreateClient() {
         },
       });
       alert("Mandant erfolgreich erstellt!");
+      reset();
     } catch (error) {
       console.error("Error creating client", error);
     }
