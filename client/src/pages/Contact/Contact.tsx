@@ -55,10 +55,7 @@ export default function Contact() {
           LinkedIn-Profil besuchen
         </a>
       </div>
-      <p className="text-lg">
-        Ich freue mich darauf, von dir zu hören. Viel Spaß beim Entdecken meiner
-        Projekte!
-      </p>
+      <p className="text-lg"> Viel Spaß beim Entdecken meiner Projekte!</p>
     </div>
   );
 }

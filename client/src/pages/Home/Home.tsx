@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center p-6">
       <h1 className="text-5xl font-extrabold text-center mb-4 text-blue-600">
-        Willkommen bei Kanzlei<span className="text-red-400">Co</span>Pilot!
+        Willkommen bei Kanzlei<span className="text-red-400">Co</span>Pilot
       </h1>
       <h2 className="text-2xl font-medium mb-6">
         Du fragst dich, was das ist?
@@ -22,9 +22,9 @@ export default function Home() {
           Freude an der Beratung.{" "}
         </em>{" "}
         <br />
-        Kanzlei<span className="text-red-400">Co</span>Pilot! ist dein
+        Kanzlei<span className="text-red-400">Co</span>Pilot ist dein
         Mini-KI-Steuerberater. Neben einer abgespeckten Version zur Erstellung
-        von Steuerpaketen und Angebote für unsere Mandanten, bieten wir
+        von Steuerpaketen und Angeboten für unsere Mandanten, bieten wir
         zusätzlich einen KI-Agenten, der dir das Leben zu steuerrechtlichen
         Fragen einfacher gestaltet!
       </p>
@@ -38,7 +38,7 @@ export default function Home() {
       <p className="max-w-3xl text-lg mb-6 text-gray-300">
         Deinen KI-Steuerberater findest du unter{" "}
         <span className="font-semibold text-blue-400">
-          "Dein Kanzlei<span className="text-red-400">Co</span>Pilot!
+          "Dein Kanzlei<span className="text-red-400">Co</span>Pilot"
         </span>
         .
       </p>

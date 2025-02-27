@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Impressum() {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center p-6">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center text-center p-6">
       <h1>Impressum</h1>
       <h3>Angaben gemäß § 5 TMG</h3>
       <p>
-        <strong>Name des Unternehmens:</strong> KanzleiCopilot GmbH
+        <strong>Name des Unternehmens:</strong> KanzleiCopilot
       </p>
       <p>
         <strong>Vertreten durch:</strong> Max Mustermann (Geschäftsführer)

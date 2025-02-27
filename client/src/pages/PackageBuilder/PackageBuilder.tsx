@@ -5,7 +5,6 @@ import {
   GET_SERVICES,
   GET_TAX_DUTIES,
 } from "../../../../server/graphQL/queries";
-import { useState } from "react";
 import { Clientform, Service, TaxDuty } from "../../types";
 import SubmitButton from "../../components/Button/SubmitButton";
 import { useForm } from "react-hook-form";
@@ -76,8 +75,11 @@ export default function PackageBuilder() {
     return <p className="text-red-500">Fehler beim Laden der Daten</p>;
 
   const selectedClient = clientsData?.getClients.find(
-    (client) => client.id === watch("clientId")
+    (client: any) => client.id === watch("clientId")
   );
+  const selectedLegalForm = watch("legalForm");
+  const selectedTaxDuties = watch("taxDuties") || {};
+  const selectedServices = watch("services") || {};
 
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col lg:flex-row items-center justify-center gap-12 p-6">
@@ -160,7 +162,7 @@ export default function PackageBuilder() {
           <SubmitButton>Angebot erstellen</SubmitButton>
         </form>{" "}
       </div>
-      <div className="flex flex-col justify-center items-start bg-gray-100 p-8 shadow-lg rounded-lg w-[600px] min-h-[400px] border border-gray-300">
+      <div className="flex flex-col justify-center items-start bg-gray-200 p-8 shadow-lg rounded-lg min-h-[400px] max-w-[350px] border border-gray-300">
         <h2 className="text-2xl text-black font-bold mb-6 text-center w-full">
           Ihr individuelles Angebot
         </h2>
@@ -171,36 +173,67 @@ export default function PackageBuilder() {
               Mandant:
             </label>
             <p className="text-gray-600 mt-1">
-              <p className="text-gray-600 mt-1">
-                {selectedClient
-                  ? `${selectedClient.firstName} ${selectedClient.lastName}`
-                  : "Kein Mandant ausgewählt"}
-              </p>
+              {selectedClient
+                ? `${selectedClient.firstName} ${selectedClient.lastName}`
+                : "Kein Mandant ausgewählt"}
             </p>
           </div>
-
           {/* Rechtsform wählen */}
           <div className="w-full p-4 border-b border-gray-300">
             <label className="text-gray-700 font-semibold text-lg">
-              Rechtsform wählen:
+              Rechtsform:
             </label>
-            <p className="text-gray-600 mt-1"></p>
-          </div>
 
+            <p className="text-gray-600 mt-1">
+              {selectedLegalForm
+                ? selectedLegalForm
+                : "Keine Rechtsform ausgewählt"}
+            </p>
+          </div>
           {/* Steuerpflicht */}
           <div className="w-full p-4 border-b border-gray-300">
             <h3 className="text-lg text-gray-700 font-semibold">
               Steuerpflicht:
             </h3>
-            <p className="text-gray-600 mt-1"></p>
+            <p className="text-gray-600 mt-1">
+              {Object.entries(selectedTaxDuties)
+                .filter(([_, value]) => value)
+                .map(([key]) => `${taxDutiesData.getTaxDuties[key]?.name}`)
+                .join(", ") || "Keine Steuerpflicht ausgewählt"}
+            </p>
           </div>
-
           {/* Wunschleistung */}
           <div className="w-full p-4 border-b border-gray-300">
             <h3 className="text-lg text-gray-700 font-semibold">
               Wunschleistung:
             </h3>
-            <p className="text-gray-600 mt-1"></p>
+            <p className="text-gray-600 mt-1">
+              {Object.entries(selectedServices)
+                .filter(([_, value]) => value)
+                .map(
+                  ([key]) =>
+                    `${servicesData.getServices[key]?.name} ${servicesData.getServices[key]?.price}€ `
+                )
+                .join(", ") || "Keine Leistung ausgewählt"}
+            </p>
+          </div>
+          <div className="flex flex-col justify-end items-end">
+            Gesamtsumme:{" "}
+            <p>
+              {Object.entries(selectedServices).reduce(
+                (acc, [index, value]) => {
+                  const service = servicesData.getServices[index];
+
+                  if (service && value) {
+                    return acc + service.price;
+                  }
+
+                  return acc;
+                },
+                0
+              )}{" "}
+              €
+            </p>
           </div>
         </form>
       </div>
