@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { CREATE_CLIENT } from "../../../../server/graphQL/queries";
+import { CREATE_CLIENT, GET_CLIENTS } from "../../../../server/graphQL/queries";
 import { useForm } from "react-hook-form";
 import { Clientform } from "../../types";
 import SubmitButton from "../../components/Button/SubmitButton";
@@ -11,7 +11,9 @@ export default function CreateClient() {
     reset,
     formState: { errors },
   } = useForm<Clientform>();
-  const [createClient] = useMutation(CREATE_CLIENT);
+  const [createClient] = useMutation(CREATE_CLIENT, {
+    refetchQueries: [{ query: GET_CLIENTS }],
+  });
 
   const onSubmit = async (data: Clientform) => {
     try {
