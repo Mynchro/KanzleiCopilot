@@ -3,7 +3,8 @@ A small project for my application at KanzleiPilot - and my first experience usi
 
 ## Purpose
 
-You probably already know <a href="https://www.kanzleipilot.de/ target="_blank" noopener noreferrer">KanzleiPilot</a> - your solution for transparent fees, clear rules, and more joy in consulting.
+You probably already know <a href="https://www.kanzleipilot.de/" class="noopener noreferrer" target="_blank">KanzleiPilot</a>
+- your solution for transparent fees, clear rules, and more joy in consulting.
 
 KanzleiCoPilot is your mini AI tax advisor. In addition to a simplified version for creating tax packages and offers for our clients, we also provide an AI agent that makes your life easier when dealing with tax law questions!
 In fact - that AI tax advisor is the main focus of this project.
